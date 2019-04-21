@@ -1,0 +1,22 @@
+body {
+	background: #EEEEEE;
+	height: 100%;
+	position: absolute;
+	width: 100%;
+}
+
+button {
+	outline: none;
+}
+
+.snmarge {
+	margin: 0;
+}
+
+.snpadding {
+	padding: 0;
+}
+
+.snradio {
+	border-radius: 0;
+}
