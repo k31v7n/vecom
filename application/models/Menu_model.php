@@ -7,13 +7,18 @@ class Menu_model extends CI_Model
 
 	public function __construct()
 	{
+		
+	}
+
+	public function cargarUsuario()
+	{
 		$this->usuario = $this->vecom->verUsuarios(['usuario' => $_SESSION['UserID']]);
 	}
 
 	public function buscar_menu($args=array())
 	{	
 		if (elemento($args, 'bmenu')) {
-
+			$this->cargarUsuario();	
 			if ($this->usuario->root == 0) {
 				$this->db->where('a.usuario', $this->usuario->usuario);
 			}
@@ -29,23 +34,6 @@ class Menu_model extends CI_Model
 		}
 
 		return false;
-	}
-
-	public function ver_accesos()
-	{
-
-		$this->db->select('a.*');
-
-		if ($this->usuario->root == 0) {
-			$this->db->join('usuario_menu b','b.menu = a.menu')
-					 ->where('b.usuario', $this->usuario->usuario)
-					 ->where('b.activo', 1);
-		}
-
-		return $this->db
-			 		->where('a.activo', 1)
-			 		->get('menu a')
-			 		->result();
 	}
 
 	public function ver_submenu($args=array())
@@ -74,8 +62,13 @@ class Menu_model extends CI_Model
 			$this->db->where('modulo', $args['modulo']);
 		}	
 
+		if (elemento($args, 'modulos')) {
+			$this->db->where_in('modulo', $args['modulos']);
+		}
+
 		$tmp = $this->db
 					->where('activo', 1)
+					->order_by('nombre', 'asc')
 					->get('modulo');
 
 		if (elemento($args, 'modulo')) {
@@ -85,33 +78,46 @@ class Menu_model extends CI_Model
 		}
 
 		return false;
+	}		
+
+	public function verOpcionesMenu()
+	{
+		$this->cargarUsuario();
+
+		if ($this->usuario->root == 0) {
+			$this->db
+				 ->where('d.usuario', $this->usuario->usuario)
+				 ->where('d.activo', 1);
+		}
+
+		return $this->db
+					->select("a.*, 
+							b.nombre as nom_modulo, 
+							b.icono as ico_modulo, 
+							c.nombre as nom_submenu") 
+					->from("menu a")
+					->join('modulo b', 'b.modulo = a.modulo')
+					->join('submenu c', 'c.submenu = a.submenu')
+					->join('usuario_menu d', 'd.menu = a.menu', 'left')
+					->where('a.activo', 1)
+					->where('c.activo', 1)
+					->where('b.activo', 1)
+					->get()
+					->result();
 	}
 
-	public function ver_menu()
+	public function verMenu()
 	{
-		$opciones = $this->ver_accesos();
+		$datos     = [];
+		$registros = $this->verOpcionesMenu();
 
-		if ($opciones) {
-			#$subm = array_unique(arrayResult($opciones, 'submenu'));
-			#$submenu = $this->ver_submenu(['nsubmenu' => $subm]);
-			$datos = array();
-			$menu  = array();
-
-			$modulo = '';
-
-			foreach ($opciones as $key => $row) {
-
-				if ($row->modulo != $modulo) {
-					$nmod = $this->ver_modulo(['modulo' => $row->modulo]);
-					$menu['modulo']['nombre'] = $nmod->nombre;
-					$menu['modulo']['icono'] = $nmod->icono;
-				}
-
-
-				$datos[] = $menu;
-				
+		if ($registros && count($registros) > 0) {
+			foreach ($registros as $key => $row) {
+				$datos[$row->modulo]['nombre'] = $row->nom_modulo;
+				$datos[$row->modulo]['icono']  = $row->ico_modulo;
+				$datos[$row->modulo]['submenu'][$row->submenu]['nombre'] = $row->nom_submenu;
+				$datos[$row->modulo]['submenu'][$row->submenu]['opcion'][$key] = $row;
 			}
-
 		}
 
 		return $datos;

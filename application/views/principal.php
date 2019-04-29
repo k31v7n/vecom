@@ -44,6 +44,7 @@
 	
 	<?= script_tag('public/cpn/jquery.js') ?>
 	<?= script_tag('public/cpn/bootstrap/js/bootstrap.min.js') ?>
+	<?= script_tag('public/cpn/jquery-ui.min.js') ?>
 	<?= script_tag('public/js/vecom.js') ?>
 	<?= script_tag('public/js/menu.js') ?>
 
