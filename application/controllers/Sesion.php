@@ -55,7 +55,7 @@ class Sesion extends CI_Controller {
 					$dato['mensaje'] = 'Debe tener una empresa asignada para trabajar.';
 				}
 			} else {
-				$dato['mensaje'] = 'El usuario o password es incorrecto.';
+				$dato['mensaje'] = 'El usuario o password ingresado es incorrecto.';
 			}
 		} else {
 			$dato['mensaje'] = 'Por favor ingresa un usuario y la contraseña.';

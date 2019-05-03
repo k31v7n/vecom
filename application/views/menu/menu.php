@@ -38,12 +38,17 @@ $espacio = strlen($correo);
 				    <ul class="dropdown-menu">
 				       	<li>
 				       		<a href="javascript:;" title="Configuración de cuenta">
-				       			<i class="fa fa-user"></i> Cuenta<?= nbs($espacio-4) ?>
+				       			<i class="fa fa-user"></i> Cuenta<?= nbs($espacio-13) ?>
+				       		</a>
+				       	</li>
+				       	<li>
+				       		<a href="javascript:;" title="Cambiar contraseña" onclick="change_password(1)">
+				       			<i class="fa fa-unlock-alt"></i> Cambiar contraseña<?= nbs($espacio-13) ?>
 				       		</a>
 				       	</li>
 				       	<li>
 				       		<a href="<?php echo base_url("index.php/sesion/log_out") ?>" title="Cerrar Sesión">
-				       			<i class="glyphicon glyphicon-log-out"></i> Cerrar Sesión<?= nbs($espacio-4) ?>
+				       			<i class="fa fa-sign-out-alt"></i> Cerrar Sesión<?= nbs($espacio-13) ?>
 				       		</a>
 				       	</li>
 				    </ul>

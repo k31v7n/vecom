@@ -31,3 +31,34 @@ function Cargando(id,tipo)
 
 	$("#"+id).html(img)
 }
+
+var MGR = {
+    xmodal   : document.getElementById("vcmodal"), 
+    xtamanio : document.getElementById("vcmodaltamanio"), 
+    xtitulo  : document.getElementById("vcmodaltitulo"), 
+    xcuerpo  : document.getElementById("vcmodalcontenido"), 
+
+    titulo : function(t) {
+        this.xtitulo.innerHTML = t
+    }, 
+    tamanio : function(t) {
+        var size = ['modal-xs', 'modal-sm', 'modal-md', 'modal-lg']
+        var tam = this.xtamanio
+        
+        size.forEach(function(e) { 
+            tam.classList.remove(e); 
+        })
+
+        tam.classList.add(size[t])
+    }, 
+    contenido : function(c) {
+        this.xcuerpo.innerHTML = c;
+    }, 
+    cargando : function()
+    {
+        Cargando('vcmodalcontenido',1)
+    },
+    modal : function() {
+        $(this.xmodal).modal();
+    }
+}

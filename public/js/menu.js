@@ -62,15 +62,4 @@ $(document).on('click', '.tree-two', function() {
 
 	$('.tree-three').hide()
 	$(this).find('.tree-three').show()
-	/*$$(this).find('.tree-three').find('a').addClass('vactive')*/
 })
-
-/*var userSelection = document.getElementsByClassName('tree-one');
-
-for(var i = 0; i < userSelection.length; i++) {
-  (function(index) {
-    userSelection[index].addEventListener("click", function() {
-       console.log("Clicked index: " + index);
-     })
-  })(i);
-}*/

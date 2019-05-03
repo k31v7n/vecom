@@ -54,6 +54,12 @@
             	</a>
             </li>
             <li class="tree-two">
+				<a href="javascript:;" onclick="change_password(1)">
+					<span class="ic-tree"><i class="fa fa-unlock-alt"></i></span>
+					<span class="nm-tree">Cambiar contraseña</span>
+            	</a>
+            </li>
+            <li class="tree-two">
 				<a href="<?= base_url("index.php/sesion/log_out") ?>">
 					<span class="ic-tree"><i class="fa fa-sign-out-alt"></i></span>
 					<span class="nm-tree">Cerrar Sesion</span>

@@ -77,10 +77,10 @@
 	outline: none;
 }
 
-.input-group-btn  button,
-.input-group-btn  button:hover,
-.input-group-btn  button:focus,
-.input-group-btn  button:active {
+.boton-search > .input-group-btn  button,
+.boton-search > .input-group-btn  button:hover,
+.boton-search > .input-group-btn  button:focus,
+.boton-search > .input-group-btn  button:active {
 	outline: none;
 	border: none;
 	border:1px solid #676767; 
@@ -88,10 +88,10 @@
 	color: #fff;
 }
 
-.input-search:focus,
-.input-group-btn  button:hover,
-.input-group-btn  button:focus,
-.input-group-btn  button:active {
+.boton-search > .input-search:focus,
+.boton-search > .input-group-btn  button:hover,
+.boton-search > .input-group-btn  button:focus,
+.boton-search > .input-group-btn  button:active {
 	border:1px solid rgba(86,213,47,0.5);
 	box-shadow: 0 0 2px rgb(86,213,47);
 }

@@ -64,4 +64,57 @@ if (!function_exists('arrayResult')) {
 		return $result;
 	}	
 }
+
+if (!function_exists('diasPassword')) {
+	function diasPassword()
+	{
+		return 60;
+	}
+}
+
+if (!function_exists('FormatoFecha')) {
+	function FormatoFecha($fecha, $tipo)
+	{
+		switch ($tipo) {
+			case 1:
+				return date("d/m/Y H:i", strtotime($fecha));
+				break;
+			case 2:
+				return date("d-m-Y", strtotime($fecha));
+				break;
+			case 3:
+				return date("d-m-Y H:i", strtotime($fecha));
+				break;
+			default:
+				return date("d-m-Y", strtotime($fecha));
+				break;
+		}
+	}
+}
+
+if (!function_exists('nota_actualizacion')) {
+	function nota_actualizacion($dias) 
+	{
+		if ($dias == 0) {
+			$dato = 'hoy';
+			
+		} else if ($dias <= 7) {
+			$dato = "hace {$dias} días";
+
+		} else if ($dias > 7) {
+			$semanas = round($dias / 7);
+			if ($semanas >= 4) {
+				$meses = round($semanas / 4);
+				$dato = "hace {$meses} meses";
+			} else {
+				$dato = "hace {$semanas} semanas";
+			}
+
+		} else {
+			$dato = "Actualización pendiente";
+		}
+
+		return $dato;
+	}
+}
 ?>

@@ -29,10 +29,10 @@
 	</section>
 	
 	<div id="vcmodal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content" id="vcmodaltamanio">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<div class="modal-dialog" id="vcmodaltamanio">
+			<div class="modal-content remove-radio">
+				<div class="modal-header modal-header-padding">
+					<button type="button" class="close" data-dismiss="modal" style="margin-top: 3px;">&times;</button>
 					<h4 class="modal-title" id="vcmodaltitulo"></h4>
 				</div>
 				<div class="modal-body" id="vcmodalcontenido"></div>
@@ -42,11 +42,12 @@
 
 	<footer></footer>
 	
-	<?= script_tag('public/cpn/jquery.js') ?>
-	<?= script_tag('public/cpn/bootstrap/js/bootstrap.min.js') ?>
-	<?= script_tag('public/cpn/jquery-ui.min.js') ?>
-	<?= script_tag('public/js/vecom.js') ?>
-	<?= script_tag('public/js/menu.js') ?>
+	<?= script_tag('public/cpn/jquery.js'); ?>
+	<?= script_tag('public/cpn/bootstrap/js/bootstrap.min.js'); ?>
+	<?= script_tag('public/cpn/jquery-ui.min.js'); ?>
+	<?= script_tag('public/js/vecom.js', true); ?>
+	<?= script_tag('public/js/inicio.js', true); ?>
+	<?= script_tag('public/js/menu.js', true); ?>
 
 	<?php 
 	if (isset($scripts)) {

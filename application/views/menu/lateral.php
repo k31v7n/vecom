@@ -4,12 +4,12 @@
 	</div>
 	<div class="vc-user-data">
 		<small><?= $_SESSION['UserName'] ?></small><br>
-		<small>Online</small><div class='vc-online'></div>
+		<small>Conectado</small><div class='vc-online'></div>
 	</div>
 	<br>
 
 	<form action="<?= base_url("index.php/vecom/buscar_menu"); ?>" id="FormSearchMenu">
-		<div class="input-group">
+		<div class="input-group boton-search">
 		    <input type="text" class="form-control input-sm input-search" placeholder="Buscar..." name="bmenu" autocomplete="off">
 		    <span class="input-group-btn">
 		    	<button class="btn btn-search btn-sm" type="submit"><i class="fa fa-search"></i></button>
