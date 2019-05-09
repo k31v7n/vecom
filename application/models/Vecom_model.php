@@ -2,6 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Vecom_model extends CI_Model {
+	public $mensaje;
+
+	public function set_mensaje($mensaje)
+	{
+		$this->mensaje = $mensaje;
+	}
+
+	public function get_mensaje()
+	{
+		return $this->mensaje;
+	}
 
 	public function verUsuarios($args=array())
 	{
@@ -39,7 +50,7 @@ class Vecom_model extends CI_Model {
 		}
 
 		$tmp = $this->db
-					->select('a.*, b.nombre as npais, b.codigo, b.iva')
+					->select('a.*, b.nombre as npais, b.codigo, b.iva, concat(a.abreviatura," - ", a.nombre) as cnempresa', false)
 					->join('pais_empresa b','b.pais_empresa = a.pais_empresa')
 					->where('a.activo', 1)
 					->where('b.activo', 1)
@@ -82,6 +93,30 @@ class Vecom_model extends CI_Model {
 					->get('cliente a');
 
 		if (elemento($args, 'cliente')) {
+			return $tmp->row();
+		} else {
+			return $tmp->result();
+		}
+
+		return false;
+	}
+
+	public function verGenerosUsuarios()
+	{
+		return $this->db
+					->get('usuario_genero')
+					->result();
+	}
+
+	public function verRoles($args=array())
+	{
+		if (elemento($args, 'rol')) {
+			$this->db->where('rol', $args['rol']);
+		}
+
+		$tmp = $this->db->get('rol');
+
+		if (elemento($args, 'uno')) {
 			return $tmp->row();
 		} else {
 			return $tmp->result();

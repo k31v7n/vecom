@@ -117,4 +117,19 @@ if (!function_exists('nota_actualizacion')) {
 		return $dato;
 	}
 }
+
+if (!function_exists('comboOpciones')) {
+	function comboOpciones($datos, $campo1, $campo2)
+	{	
+		$result = ['' => '---------------'];
+
+		if ($datos) {
+			foreach ($datos as $key => $row) {
+				$result[$row->$campo1] = $row->$campo2;
+			}
+		}
+
+		return $result;
+	}
+}
 ?>

@@ -10,7 +10,7 @@ class Sesion extends CI_Controller {
 	}
 
 	public function index()
-	{
+	{	
 		if (login()) {
 			redirect('tablero');
 
@@ -44,14 +44,16 @@ class Sesion extends CI_Controller {
 					$_SESSION['UserPhoto']   = $usuario->foto;
 					$_SESSION['UserJefe']    = $usuario->jefe;
 					$_SESSION['UserRol']     = $usuario->rol;
+					$_SESSION['UserGenero']  = $usuario->usuario_genero;
 					$_SESSION['UserSubjefe'] = $usuario->subjefe;
 					$_SESSION['EmpresaID']   = $empresa->empresa;
 					$_SESSION['EmpresaName'] = $empresa->nombre;
+					$_SESSION['EmpresaAbre'] = $empresa->abreviatura;
 
 					$dato['exito'] = true;
 					$dato['redirect'] = base_url("index.php/tablero");
 
- 				} else {	
+ 				} else {
 					$dato['mensaje'] = 'Debe tener una empresa asignada para trabajar.';
 				}
 			} else {

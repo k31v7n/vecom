@@ -28,3 +28,71 @@ button {
 .alert-padding {
 	padding: 5px 10px;
 }
+
+table {
+	font-size: 13px;
+}
+
+.table>thead>tr>th,
+.table>thead>tr>td,
+.table>tbody>tr>th,
+.table>tbody>tr>td,
+.table>tfoot>tr>th,
+.table>tfoot>tr>td {
+	padding: 4px 8px;
+	vertical-align: middle;
+}
+
+.table-bordered>tbody>tr:hover {
+	background: #FFF59D;
+}
+
+.vc-photo-user-list {
+	float: left;
+	/*width: 40px;
+	margin-right: 10px;*/
+}
+
+.vc-photo-user-list img {
+	height: 40px;
+	border-radius: 50%;
+}
+
+.vc-alert-conte {
+	padding: 0 10px;
+	position: absolute;
+	right: 2%;
+	top: 0;
+	width: 400px;
+	z-index: 1031;
+}
+
+.vc-alert-ms {
+	background: #FFFFFF;
+	border: 1px solid #AFABAB;
+	box-shadow: 0 0 4px rgba(0,0,0,0.5);
+	display: flex;
+	padding: 10px;
+	margin-top: 15px;
+	width: 100%;
+}
+
+.vc-ms-icon {
+	width: 15%;
+	float: left;
+}
+
+.vc-ms-data {
+	width: 85%;
+	float: left;
+}
+
+@media (max-width: 767px) {
+	.table-responsivex {
+		overflow: auto;
+	}
+
+	.vc-alert-conte {
+		width: 100%;
+	}
+}

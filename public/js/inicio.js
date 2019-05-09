@@ -25,11 +25,9 @@ $(document).on('click', '#bpactual', function()
 	if (elemento.getAttribute('type') === 'password') {
 		elemento.setAttribute('type', 'text')
 		this.classList.remove('btn-default')
-		this.classList.add('btn-primary')
 
 	} else {
 		elemento.setAttribute('type', 'password')
-		this.classList.remove('btn-primary')
 		this.classList.add('btn-default')
 
 	}
@@ -44,12 +42,10 @@ $(document).on('click', '#bpnueva', function()
 		if (elemento[i].getAttribute('type') === 'password') {
 			elemento[i].setAttribute('type', 'text')
 			this.classList.remove('btn-default')
-			this.classList.add('btn-primary')
 
 		} else {
 
 			elemento[i].setAttribute('type', 'password')
-			this.classList.remove('btn-primary')
 			this.classList.add('btn-default')
 		}
 	}

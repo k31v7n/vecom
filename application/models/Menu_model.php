@@ -15,21 +15,22 @@ class Menu_model extends CI_Model
 		$this->usuario = $this->vecom->verUsuarios(['usuario' => $_SESSION['UserID']]);
 	}
 
-	public function buscar_menu($args=array())
+	public function 	buscar_menu($args=array())
 	{	
 		if (elemento($args, 'bmenu')) {
 			$this->cargarUsuario();	
 			if ($this->usuario->root == 0) {
-				$this->db->where('a.usuario', $this->usuario->usuario);
+				$this->db
+					 ->where('b.usuario', $this->usuario->usuario)
+					 ->where('b.activo', 1);
 			}
 
 			return $this->db
-						->select('b.*')
-						->join('menu b','a.menu = b.menu')
-						->like('b.nombre', $args['bmenu'], 'after')
+						->select('a.*')
+						->join('usuario_menu b','a.menu = b.menu', 'left')
+						->like('a.nombre', $args['bmenu'], 'after')
 						->where('a.activo', 1)
-						->where('b.activo', 1)
-						->get('usuario_menu a')
+						->get('menu a')
 						->result();
 		}
 

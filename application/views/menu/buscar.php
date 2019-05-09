@@ -3,7 +3,7 @@
 
 		<?php foreach ($opciones as $key => $row): ?>
 			<li>
-				<a href="<?= $row->url; ?>">
+				<a href="<?= base_url("{$row->url}"); ?>">
 					<?= "{$row->icono} {$row->nombre}"; ?>
 				</a>
 			</li>

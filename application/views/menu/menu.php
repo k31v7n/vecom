@@ -1,5 +1,5 @@
 <?php 
-$empresa = $_SESSION['EmpresaName'];
+$empresa = $_SESSION['EmpresaAbre'];
 $correo  = $_SESSION['UserMail'];
 $espacio = strlen($correo);
 ?>

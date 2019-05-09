@@ -1,6 +1,10 @@
 <div class="vc-cont-user">
 	<div class="vc-photo">
-		<img src="<?= base_url("public/img/boy.svg") ?>" alt="" style="height: 50px; ">
+		<?php if ($_SESSION['UserGenero'] == 2): ?>
+			<img src="<?= base_url("public/img/girl.svg") ?>" alt="" style="height: 50px; ">
+		<?php else: ?>
+			<img src="<?= base_url("public/img/boy.svg") ?>" alt="" style="height: 50px; ">
+		<?php endif ?>
 	</div>
 	<div class="vc-user-data">
 		<small><?= $_SESSION['UserName'] ?></small><br>

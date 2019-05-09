@@ -26,7 +26,7 @@
 							<ul class="vc-menu-ul">
 								<?php foreach ($submenu['opcion'] as $opcion): ?>
 									<li class="tree-three">
-										<a href="javascript:;">
+										<a href="<?= base_url($opcion->url)?>">
 											<span class="ic-tree"><?= $opcion->icono;?></span>
 											<span class="nm-tree"><?= $opcion->nombre;?></span>
 										</a>
