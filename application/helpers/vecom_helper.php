@@ -97,7 +97,8 @@ if (!function_exists('nota_actualizacion')) {
 	{
 		if ($dias == 0) {
 			$dato = 'hoy';
-			
+		} else if ($dias == 1) {
+			$dato = 'hace 1 día';
 		} else if ($dias <= 7) {
 			$dato = "hace {$dias} días";
 

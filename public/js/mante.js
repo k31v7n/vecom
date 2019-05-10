@@ -10,7 +10,10 @@ function abrirPaginaMante(args)
 	switch(args.tipo) {
 		case 1:
 			url = base_url("index.php/mante/usuario/form/" + ide)
-			break;
+		break;
+		case 2:
+			url = base_url("index.php/mante/empresa/form/" + ide)
+		break
 	}
 
 	var xhr = new XMLHttpRequest()
@@ -31,7 +34,10 @@ function abrirListaMante(args)
 	switch(args.tipo) {
 		case 1:
 			url = base_url("index.php/mante/usuario/lista/" + ide)
-			break;
+		break;
+		case 2:
+			url = base_url("index.php/mante/empresa/lista/" + ide)
+		break;
 	}
 
 	var xhr = new XMLHttpRequest()

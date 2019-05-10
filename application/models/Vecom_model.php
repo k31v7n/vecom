@@ -124,6 +124,23 @@ class Vecom_model extends CI_Model {
 
 		return false;
 	}
+
+	public function verPaisesEmpresa()
+	{
+		return $this->db
+					->where('activo', 1)
+					->get('pais_empresa')
+					->result();
+	}
+
+	public function verMonedas()
+	{
+		return $this->db
+					->select("*, 
+							concat(codigo, ' - ', nombre) as nmoneda", false)
+					->get('moneda')
+					->result();
+	}
 }
 
 /* End of file Vecom_model.php */

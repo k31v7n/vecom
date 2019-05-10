@@ -1,5 +1,7 @@
 function change_password(tipo)
 {
+	document.getElementById('vc-check').checked = false
+	
 	var m = parent.MGR
 	m.cargando()
 
