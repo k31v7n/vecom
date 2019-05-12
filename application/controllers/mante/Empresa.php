@@ -35,9 +35,10 @@ class Empresa extends CI_Controller {
 		$form->set_registro($emp->empresa);
 		$form->set_pais_empresa($this->vecom->verPaisesEmpresa());
 		$form->set_monedas($this->vecom->verMonedas());
-
+		
 		$this->load->view('mante/empresa/form', [
-			'form' => $form->get_formulario()
+			'form'    => $form->get_formulario(),
+			'empresa' => $emp->empresa
 		]);
 	}
 
@@ -90,6 +91,79 @@ class Empresa extends CI_Controller {
 
 		$this->load->view("mante/empresa/lista", [
 			'lista' => $emp->getEmpresas(['mante' => true])
+		]);	
+	}
+
+	public function pais()
+	{
+		$emp = new Empresa_model();
+
+		$this->load->view('principal', [
+			'vista'   => 'mante/paises/cuerpo',
+			'scripts' => $this->scripts,
+			'lista'	  => $emp->getPaisesEmpresa(['mante'])
+		]);		
+	}
+
+	public function form_pais($tipo, $pais='')
+	{
+		$this->load->library('forms/mante/Fpais');
+
+		$emp = new Empresa_model();
+		if (!empty($pais)) {
+			$emp->verPaisEmpresa($pais);
+		}
+
+		$form = new Fpais();
+		$form->set_accion(base_url("index.php/mante/empresa/guardar_pais/{$tipo}/{$pais}"));
+		$form->set_registro($emp->pais);
+
+		$this->load->view("mante/paises/form", [
+			'form' => $form->get_formulario(),
+			'pais' => $emp->pais,
+			'tipo' => $tipo
+		]);	
+	}
+
+	public function guardar_pais($tipo, $pais='')
+	{
+		$dato = ['exito' => 2, 'forma' => $tipo, 'tipo' => 3];
+
+		if ($tipo == 2) {
+			$dato['esmodal'] = true;
+		} 
+
+		if (elemento($_POST, 'nombre') &&
+	    	elemento($_POST, 'codigo') &&
+	    	elemento($_POST, 'codigo_postal') &&
+	    	elemento($_POST, 'iva')) {
+
+			$emp = new Empresa_model();
+			if (!empty($pais)) {
+				$emp->verPaisEmpresa($pais);
+			}
+			
+			if ($emp->guardarPais($_POST)) {
+				$dato['mensaje'] = "El país <b>{$emp->pais->nombre}</b> se guardó correctamente.";
+				$dato['ide'] = $emp->pais->pais_empresa;
+				$dato['exito'] = true;
+			} else {
+				$dato['mensaje'] = $emp->get_mensaje();
+			}
+		} else {
+			$dato['exito']   = false;
+			$dato['mensaje'] = "Por favor complete los campos obligatorios.";
+		}
+
+		enviarJson($dato);
+	}
+
+	public function lista_pais()
+	{
+		$emp = new Empresa_model();
+
+		$this->load->view("mante/paises/lista", [
+			'lista' => $emp->getPaisesEmpresa(['mante' => true])
 		]);	
 	}
 }

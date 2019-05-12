@@ -6,6 +6,12 @@
 			<button class="btn btn-xs btn-default" onclick="abrirPaginaMante({tipo:2})">
 				<i class="fa fa-plus"></i> Nuevo
 			</button>
+
+			<button class="btn btn-xs btn-success" 
+				onclick="abrirPaginaMante({tipo:3, modal:true, tamanio:2, titulo:'Agregar País', icono:'globe-americas', forma:2})">
+
+				<i class="fa fa-plus"></i> Nuevo País
+			</button>
 		</h2>
 		<hr>
 		<div id="contenidoManteForm"></div>

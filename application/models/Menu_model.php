@@ -15,7 +15,7 @@ class Menu_model extends CI_Model
 		$this->usuario = $this->vecom->verUsuarios(['usuario' => $_SESSION['UserID']]);
 	}
 
-	public function 	buscar_menu($args=array())
+	public function buscar_menu($args=array())
 	{	
 		if (elemento($args, 'bmenu')) {
 			$this->cargarUsuario();	
@@ -81,6 +81,25 @@ class Menu_model extends CI_Model
 		return false;
 	}		
 
+	public function ver_menu($args=array())
+	{
+		if (elemento($args, 'menu')) {
+			$this->db->where('menu', $args['menu']);
+		}
+
+		$tmp = $this->db
+					->where('activo', 1)
+					->get('menu');
+
+		if (elemento($args, 'menu')) {
+			return $tmp->row();
+		} else {
+			return $tmp->result();
+		}
+
+		return false;
+	}
+
 	public function verOpcionesMenu()
 	{
 		$this->cargarUsuario();
@@ -114,9 +133,11 @@ class Menu_model extends CI_Model
 
 		if ($registros && count($registros) > 0) {
 			foreach ($registros as $key => $row) {
+				$datos[$row->modulo]['modulo'] = $row->modulo;
 				$datos[$row->modulo]['nombre'] = $row->nom_modulo;
 				$datos[$row->modulo]['icono']  = $row->ico_modulo;
-				$datos[$row->modulo]['submenu'][$row->submenu]['nombre'] = $row->nom_submenu;
+				$datos[$row->modulo]['submenu'][$row->submenu]['submenu'] = $row->submenu;
+				$datos[$row->modulo]['submenu'][$row->submenu]['nombre']  = $row->nom_submenu;
 				$datos[$row->modulo]['submenu'][$row->submenu]['opcion'][$key] = $row;
 			}
 		}

@@ -1,26 +1,53 @@
 function abrirPaginaMante(args)
 {
-	$("#contenidoManteForm").show()
-	$("#ListaMante").hide()
+	if (args.modal) {
+		var icono = ''
+		if (args.icono) {
+			icono = '<i class="fa fa-'+args.icono+'"></i>'
+		}
+
+		var m = parent.MGR
+		m.cargando()
+		m.titulo(icono+' '+args.titulo)
+		m.tamanio(args.tamanio)
+		m.modal()
+	}
 
 	var url = ''
 	var ide = (args.ide) ? args.ide : ''
-	vercargando('contenidoManteForm', 1)
+	var div = 'contenidoManteForm'
 
 	switch(args.tipo) {
 		case 1:
+			abrirManteForm()
 			url = base_url("index.php/mante/usuario/form/" + ide)
 		break;
 		case 2:
+			abrirManteForm()	
 			url = base_url("index.php/mante/empresa/form/" + ide)
 		break
+		case 3:
+			if (args.forma == 1) {
+				abrirManteForm()
+			} else {
+				div = 'vcmodalcontenido'
+			}
+
+			url = base_url("index.php/mante/empresa/form_pais/" +args.forma +"/"+ ide)
+		break
 	}
+
+	vercargando(div, 1)
 
 	var xhr = new XMLHttpRequest()
 	xhr.open('POST', url, true)
 	xhr.onload = function()
 	{
-		document.getElementById('contenidoManteForm').innerHTML = this.responseText
+		if (args.modal) {
+			m.contenido(this.responseText)
+		} else {
+			document.getElementById(div).innerHTML = this.responseText
+		}
 	}
 	xhr.send()
 }
@@ -37,6 +64,9 @@ function abrirListaMante(args)
 		break;
 		case 2:
 			url = base_url("index.php/mante/empresa/lista/" + ide)
+		break;
+		case 3:
+			url = base_url("index.php/mante/empresa/lista_pais/" + ide)
 		break;
 	}
 
@@ -87,7 +117,11 @@ function guardarManteForm(args)
 		var res = JSON.parse(this.responseText)
 		if (res.exito === true) {
 			abrirPaginaMante(res)
-			abrirListaMante({tipo:res.tipo})
+
+			if (!res.esmodal) {
+				abrirListaMante({tipo:res.tipo})
+			}
+
 		} else {
 			$("#btnMante").button('reset')
 		}
@@ -102,6 +136,12 @@ $(document).on("submit","#FormGuardarMante",function(e) {
 	e.preventDefault()
 	guardarManteForm(this)
 })
+
+function abrirManteForm()
+{
+	$("#contenidoManteForm").show()
+	$("#ListaMante").hide()
+}
 
 function closeManteForm()
 {

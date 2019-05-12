@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Empresa_model extends Vecom_model {
 
+	public $pais = NULL;
 	public $empresa = NULL;
 	public $edato = [];
 
@@ -19,6 +20,14 @@ class Empresa_model extends Vecom_model {
 							  ->where('empresa', $id)
 							  ->get('empresa')
 							  ->row();
+	}
+
+	public function verPaisEmpresa($id)
+	{
+		$this->pais = $this->db
+						   ->where('pais_empresa', $id)
+						   ->get('pais_empresa')
+						   ->row();
 	}
 
 	public function getEmpresas($args=array())
@@ -92,6 +101,76 @@ class Empresa_model extends Vecom_model {
 			} else {
 				$this->set_mensaje("No se realizó ninguna modificación.");
 			}
+		}
+
+		return false;
+	}
+
+
+	public function guardarPais($args=array())
+	{
+		$this->db
+			->set('nombre', elemento($args, 'nombre', NULL))
+			->set('codigo', elemento($args, 'codigo', NULL))
+			->set('codigo_postal', elemento($args, 'codigo_postal', 0))
+			->set('iva', elemento($args, 'iva', 0))
+			->set('activo', elemento($args, 'activo', 0));
+
+		if ($this->pais === NULL) {
+			$this->db->insert('pais_empresa');
+
+			if ($this->db->affected_rows() > 0) {
+				$this->verPaisEmpresa($this->db->insert_id());
+				return true;
+			} else {
+				$this->set_mensaje("No fue posible guardar el país. Error (BD)");
+			}
+		} else {
+
+			if (elemento($args, 'activo', 0) === 0) {
+				if ($this->verificaPaisEnUso()) {
+					$this->set_mensaje("No es posible desactivar el pais, esta siendo usado en otro proceso.");
+					return false;
+				}
+			}
+
+			$this->db
+				 ->where('pais_empresa', $this->pais->pais_empresa)
+				 ->update('pais_empresa');
+
+			if ($this->db->affected_rows() > 0) {
+				$this->verPaisEmpresa($this->pais->pais_empresa);
+				return true;
+			}  else {
+				$this->set_mensaje("No se registro ningun cambio");
+			}
+		}
+
+		return false;
+	}
+
+	public function getPaisesEmpresa($args=array())
+	{
+		if (elemento($args, 'mante')) {
+			$this->db->where_in('activo', [0,1]);
+		} else {
+			$this->db->where('activo', 1);
+		}
+
+		return $this->db
+				    ->get('pais_empresa')
+				    ->result();
+	}
+
+	public function verificaPaisEnUso()
+	{
+		$tmp = $this->db
+					->where('pais_empresa', $this->pais->pais_empresa)
+					->where('activo', 1)
+					->get('empresa');
+
+		if ($tmp->num_rows() > 0) {
+			return true;
 		}
 
 		return false;

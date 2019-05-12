@@ -4,7 +4,7 @@
 	<div class="form-group form-group-sm">
 		<div class="col-sm-offset-2 col-sm-10">
 			<h4 class="remove-margin">
-				<?php if (!empty($usuario)): ?>
+				<?php if (!empty($empresa)): ?>
 					Actualización de Empresa
 				<?php else: ?>
 					Registro de Nueva Empresa

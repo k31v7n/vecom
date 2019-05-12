@@ -44,17 +44,22 @@ class Vecom extends CI_Controller {
 			if (trim($_POST['pnueva']) === trim($_POST['pconfirmar'])) {
 				
 				$user = new Usuario_model($this->user);	
+
+				$user->set_datos(['password' => $_POST['pnueva']]);
+
 				if (sha1(trim($_POST['pactual'])) === $user->usuario->password) {
-					if ($user->guardar_bitacora_password()) {
-
-						$user->guardarUsuario(['password' => $_POST['pnueva']]);
-
-						$datos['exito'] = true;
-						$datos['mensaje'] = 'La contraseña fue actualizada correctamente.';
+					
+					if (sha1(trim($_POST['pnueva'])) ===  $user->usuario->password) {
+						$datos['mensaje'] = "La contraseña nueva no debe ser igual a la que utiliza actualmente.";
 					} else {
-						$datos['mensaje'] = 'No fue posible actualizar la información.';
-					}
+						if ($user->guardarUsuario()) {
 
+							$datos['exito'] = true;
+							$datos['mensaje'] = 'La contraseña fue actualizada correctamente.';
+						} else {
+							$datos['mensaje'] = 'No fue posible actualizar la información.';
+						}
+					}
 				} else {
 					$datos['mensaje'] = 'La contraseña actual es incorrecta, intente de nuevo.';
 				}
@@ -66,6 +71,37 @@ class Vecom extends CI_Controller {
 		}
 
 		enviarJson($datos);
+	}
+
+	public function pagina($opcion='')
+	{
+		$notfound = false;
+
+		if (!empty($opcion)) {
+
+			$menu = $this->Menu_model->ver_menu(['menu' => $opcion]);
+
+			if (count($menu) > 0) {
+				$_SESSION['vcModulo']  = $menu->modulo;
+				$_SESSION['vcSubmenu'] = $menu->submenu;
+				$_SESSION['vcMenu']    = $menu->menu;
+
+				redirect(base_url("{$menu->url}"));
+			} else {
+				$notfound = true;
+			}
+		} else {
+			$notfound = true;
+		}
+		
+		
+		if ($notfound == true) {
+			unset($_SESSION['vcModulo']);
+			unset($_SESSION['vcMenu']);
+			unset($_SESSION['vcSubmenu']);
+
+			redirect('tablero');
+		}
 	}
 }
 
