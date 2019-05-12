@@ -36,8 +36,8 @@ function cerrarMenuBusqueda()
 
 $(document).on('click', '.tree-one', function() {
 
-	$('.tree-one > a').removeClass('vactive')
-	$(this).find('a:first').addClass('vactive')
+	/*$('.tree-one > a').removeClass('vactive')
+	$(this).find('a:first').addClass('vactive')*/
 
 	var disabled = '<i class="fa fa-angle-left pull-right">'
 	var enabled  = '<i class="fa fa-angle-down pull-right">'
@@ -51,8 +51,8 @@ $(document).on('click', '.tree-one', function() {
 
 $(document).on('click', '.tree-two', function() {
 
-	$('.tree-two > a').removeClass('vactiveb')
-	$(this).find('a:first').addClass('vactiveb')
+	/*$('.tree-two > a').removeClass('vactiveb')
+	$(this).find('a:first').addClass('vactiveb')*/
 
 	var disabled = '<i class="fa fa-angle-left pull-right">'
 	var enabled  = '<i class="fa fa-angle-down pull-right">'

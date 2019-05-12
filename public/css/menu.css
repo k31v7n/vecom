@@ -170,6 +170,12 @@
 	display: none;
 }
 
+.vc-menu-ul li .activaopcion {
+	background: rgba(0,0,0,0.3);
+	border-left:5px solid #038106;
+	color:#fff;
+}
+
 @media (max-width: 767px) {
 	.vc-menu {
 		margin-left: -230px;

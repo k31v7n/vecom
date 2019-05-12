@@ -20,6 +20,7 @@ $espacio = strlen($correo);
 
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
+			    <li class="active"><a href="<?= base_url("index.php/vecom/pagina")?>"><i class="fa fa-chart-line"></i> Tablero</a></li>
 			    <li class="notify-bell">
 			    	<a href="javascript:;" id='bell-notify'>
 			    		0 <i class="fa fa-bell"></i>
