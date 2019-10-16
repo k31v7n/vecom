@@ -47,6 +47,10 @@ table {
 	background: #FFF59D;
 }
 
+.table-striped>tbody>tr:hover {
+	background: #FFF59D;
+}
+
 .vc-photo-user-list {
 	float: left;
 	/*width: 40px;

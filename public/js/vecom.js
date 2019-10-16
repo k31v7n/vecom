@@ -4,6 +4,10 @@ function cargarBoton(id,texto)
 	$("#"+id).button('loading')
 }
 
+function activarBotones() {
+    $("button").button("reset")
+}
+
 function base_url(url)
 {
 	var link = window.location.origin+"/vips/vecom/"

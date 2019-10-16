@@ -31,9 +31,34 @@ if (!function_exists('script_tag')) {
 	}
 }
 
+if (!function_exists('style_tag')) {
+	function style_tag($href, $print=false) 
+	{
+		if ($print) {
+			$link = "<style type='text/css'>\n" . file_get_contents(base_url($href)) . "\n</style>\n";
+		} else {
+			$CI =& get_instance();
+			$link = '<link rel="stylesheet" type="text/css" ';
+			if (preg_match('#^([a-z]+:)?//#i', $href)) {
+				$link .= 'href="'.$href.'" ';
+			}
+			else {
+				$link .= 'href="'.$CI->config->slash_item('base_url').$href.'" ';
+			}
+			
+			$link .= "/>\n";
+		}
+		return $link;
+	}
+}
+
 if (!function_exists('elemento')) {
 	function elemento($args, $indice, $valor=false) 
 	{
+		if (is_object($args)) {
+			$args = (array)$args;
+		}
+		
 		if (is_array($args) && array_key_exists($indice, $args) && 
 			!empty($args[$indice]) && $args[$indice]) {
 			

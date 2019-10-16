@@ -49,6 +49,7 @@ class Sesion extends CI_Controller {
 					$_SESSION['EmpresaID']   = $empresa->empresa;
 					$_SESSION['EmpresaName'] = $empresa->nombre;
 					$_SESSION['EmpresaAbre'] = $empresa->abreviatura;
+					$_SESSION['EmpresaMone'] = $empresa->moneda;
 
 					$dato['exito'] = true;
 					$dato['redirect'] = base_url("index.php/tablero");

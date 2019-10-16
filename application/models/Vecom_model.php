@@ -89,7 +89,7 @@ class Vecom_model extends CI_Model {
 							c.nombre as npais, 
 							c.codigo')
 					->join('empresa b','b.empresa = a.empresa')
-					->join('pais_empresa c','c.pais_empresa', 'b.pais_empresa')
+					->join('pais_empresa c','c.pais_empresa = b.pais_empresa')
 					->get('cliente a');
 
 		if (elemento($args, 'cliente')) {
