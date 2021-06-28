@@ -8,9 +8,9 @@
 				<button class="btn btn-xs btn-default" onclick="openFProv()">
 					<i class="fa fa-plus"></i> Nuevo
 				</button>
-				<button class="btn btn-xs btn-primary" onclick="openFclasificacion()">
+				<!-- <button class="btn btn-xs btn-primary" onclick="openFclasificacion()">
 					<i class="fa fa-plus"></i> Clasificacion
-				</button>
+				</button> -->
 				<button class="btn btn-xs btn-info" onclick="openFtipoProveedor()">
 					<i class="fa fa-plus"></i> Tipo proveedor
 				</button>

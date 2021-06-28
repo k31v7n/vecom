@@ -141,6 +141,12 @@ class Vecom_model extends CI_Model {
 					->get('moneda')
 					->result();
 	}
+
+	public function verEstatus()
+	{
+		return $this->db->get("venta_estatus")
+						->result();
+	}
 }
 
 /* End of file Vecom_model.php */

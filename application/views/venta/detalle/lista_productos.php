@@ -24,11 +24,19 @@
 						'detalle'  : ''
 					})"
 				>
-
-					<img 
-						src="<?= base_url('public/img/logo.jpg')?>" 
-						alt="<?= $row->nombre; ?>"
-					>
+					<?php if ($row->imagen && file_exists(FCPATH.$row->imagen)): ?>
+						<img 
+							src="<?= base_url($row->imagen)?>" 
+							alt="<?= $row->nombre; ?>"
+							style="height: 200px;"
+						>
+					<?php else: ?>
+						<img 
+							src="<?= base_url('public/img/tag.jpg')?>" 
+							alt="Producto"
+							style="height: 200px;"
+						>
+					<?php endif ?>
 			  		<b><?= $row->codigo; ?></b> <?= $row->nombre; ?>
 			  		<br>
 			  		<?= number_format($row->precio_venta, 2); ?>/<?= $row->unidad_codigo; ?>

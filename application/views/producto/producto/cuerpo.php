@@ -33,6 +33,7 @@
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr style="background: #eeeeee;">
+						<th class="text-center"></th>
 						<th class="text-center">Código</th>
 						<th class="text-center">Nombre</th>
 						<th class="text-center">Cantidad</th>

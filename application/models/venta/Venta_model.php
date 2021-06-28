@@ -83,7 +83,7 @@ class Venta_model extends CI_Model
 	    if (elemento($args, 'venta_estatus')) {
 	    	$this->set_dato_insert('venta_estatus', $args['venta_estatus']);
 	    }else{
-	    	$this->set_dato_insert('venta_estatus', "1");//Estado de borrador de ventas
+	    	$this->set_dato_insert('venta_estatus', "1"); # Estado abierto de ventas
 	    }
 
 	    if (elemento($args, 'tipo_pago')) {
@@ -150,6 +150,18 @@ class Venta_model extends CI_Model
 			$this->db->where("a.venta", $args);
 		}
 
+		if (elemento($args, 'fdel')) {
+			$this->db->where('date(a.fecha_sis) >=', $args['fdel']);
+		}
+
+		if (elemento($args, 'fal')) {
+			$this->db->where('date(a.fecha_sis) <=', $args['fal']);
+		}
+
+		if (elemento($args, 'estatus')) {
+			$this->db->where('a.venta_estatus', $args['estatus']);
+		}
+
 		$tmp = $this->db->select("a.venta as venta,
 								  a.fecha_sis as fecha,
 								  a.cliente as cliente,
@@ -164,7 +176,7 @@ class Venta_model extends CI_Model
 								  c.nombre as nombre_moneda,
 								  d.nombre as nombre_tipo_pago,
 								  e.nombre as usuario,
-								  f.nombre as estatus,
+								  f.nombre as estatus
 								  ")
 						->from("venta a")
 						->join("cliente b", "b.cliente = a.cliente", "LEFT")

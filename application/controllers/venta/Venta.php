@@ -44,9 +44,10 @@ class Venta extends CI_Controller {
 		if (!empty($venta)) {
 			$m->set_venta($venta);
 			$form->set_registro($m->get_venta());
+			$form->set_venta_activa(5);
 		}else{
 			#Estado activa en tabla venta_estatus
-			$form->set_venta_activa(3); 
+			$form->set_venta_activa(2); 
 		}
 
 		$clientes = $this->vecom->verClientes();

@@ -10,7 +10,7 @@ function activarBotones() {
 
 function base_url(url)
 {
-	var link = window.location.origin+"/vips/vecom/"
+	var link = window.location.origin+"/kovi"
 	if (url) { link = link +'/'+ url }
 
 	return link

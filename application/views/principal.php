@@ -9,7 +9,7 @@
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta charset="UTF-8">
-	<title>Vecom | VIPS</title>
+	<title>Kovi</title>
 </head>
 <body>
 	<header>

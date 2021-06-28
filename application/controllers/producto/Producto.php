@@ -58,18 +58,20 @@ class Producto extends CI_Controller {
 			$m->set_producto($producto);
 		}
 
+		if (isset($_FILES['imagen'])) {
+
+			$nombre = $_FILES['imagen']['name'];
+
+			$ruta = "public/productos/{$nombre}";
+
+	
+			if (move_uploaded_file($_FILES['imagen']['tmp_name'], FCPATH.'/'.$ruta)) {
+				$_POST['imagen'] = $ruta;
+			}
+		}
+
 		$res = $m->guardar_producto($_POST);
 		if ($res) {
-
-			#Guarda imagen del producto si se ha selccionado alguna
-
-    //         $this->load->library('upload', [
-    //         	'upload_path'   = base_url('public/productos/');
-				// 'allowed_types' = 'gif|jpg|png';
-    //         ]);
-
-            // $this->upload->do_upload('userfile')
-
 			$exito = true;
 		}
 
@@ -80,7 +82,6 @@ class Producto extends CI_Controller {
 			"exito"	   => $exito,
 			"producto" => $res
 		]);
-
 	}
 
 	public function filtar()

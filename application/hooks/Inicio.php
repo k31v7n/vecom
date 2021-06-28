@@ -9,7 +9,7 @@ class Inicio
 	{
         $this->ci =& get_instance();
      	$this->autorizadas = [
-     		"/vips/vecom/",
+     		"/kovi/",
      		"/sesion/iniciar"
      	];   
 	}

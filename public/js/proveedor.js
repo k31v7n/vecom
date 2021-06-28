@@ -49,6 +49,7 @@ function guardar(form) {
 
 		} else if (res.tipo_proveedor) {
 			tipoProveedor(res.tipo_proveedor);
+			document.getElementById("formTipoProveedor").reset();
 
 		}
 

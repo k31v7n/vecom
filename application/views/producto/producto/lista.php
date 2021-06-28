@@ -2,6 +2,11 @@
 	<?php foreach ($registros as $row): ?>
 		<tr ondblclick="openFProducto(<?= $row->producto; ?>)">
 
+			<td class="text-center" width="70px">
+				<?php if ($row->imagen && file_exists(FCPATH.$row->imagen)): ?>
+					<img style="height:50px;" src="<?= base_url($row->imagen); ?>" alt="img">
+				<?php endif ?>
+			</td>
 			<td><?= $row->codigo; ?></td>
 			<td><?= $row->nombre; ?></td>
 			<td><?= $row->cantidad; ?></td>

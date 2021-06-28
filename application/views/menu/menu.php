@@ -14,7 +14,7 @@ $espacio = strlen($correo);
 						<i class="glyphicon glyphicon-menu-hamburger"></i>
 					</label>
 				</span>
-				<?= $empresa; ?>
+				<img src="<?php echo base_url('public/img/milogo.png') ?>" alt="Logo" style="height: 30px; margin-top:-5px;">
 			</div>
 		</div>
 

@@ -92,8 +92,8 @@
 	</div>
 
 	<?= $form->fclose; ?>
-
-	<?php if (!empty($compra)): ?>
-		<?php $this->load->view('compra/detalle/cuerpo'); ?>
-	<?php endif ?>
 </div>
+
+<?php if (!empty($compra)): ?>
+	<?php $this->load->view('compra/detalle/cuerpo'); ?>
+<?php endif ?>
